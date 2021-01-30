@@ -142,3 +142,4 @@ cython_debug/
 
 .idea/
 uwm_czz/
+project/settings_local.py
