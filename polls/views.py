@@ -1,4 +1,3 @@
-
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -15,10 +14,30 @@ class IndexView(generic.ListView):
         """Return the last five published questions."""
         return Question.objects.order_by('-pub_date')[:5]
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['list_zmiennych'] = [None, 'b', 'c']
+        context['for_example'] = {
+            'Bartek': 'czerwony',
+            'Aga': 2,
+            'test': 'fdsfs',
+        }
+        context['cities'] = [
+            {'name': 'Mumbai', 'population': '19,000,000', 'country': 'India'},
+            {'name': 'Calcutta', 'population': '15,000,000', 'country': 'India'},
+            {'name': 'New York', 'population': '20,000,000', 'country': 'USA'},
+            {'name': 'Chicago', 'population': '7,000,000', 'country': 'USA'},
+            {'name': 'Tokyo', 'population': '33,000,000', 'country': 'Japan'},
+            {'name': 'Mumbai2', 'population': '18,000,000', 'country': 'India'},
+        ]
+        context['text'] = "i'm using Django <strong>test</strong>"
+        context['liczba'] = 34.2345
+        return context
+
 
 class ChoiceView(generic.ListView):
     model = Choice
-    
+
     def get_queryset(self):
         return Choice.objects.filter(choice_text__istartswith='d')
 

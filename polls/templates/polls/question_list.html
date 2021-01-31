@@ -1,11 +1,64 @@
-{% if object_list %}
-    <ul>
-    {% for question in object_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+{% extends 'base.html' %}
+{% block title %}{{ block.super }} - Lista pytań{% endblock %}
+{% block content %}
+  {% filter upper %}
+    <h1>Lista pytań</h1>
+  {% endfilter %}
 
-Dziś jest : {{today}}
+  <p>Przyklad first of {% firstof 0 2 3 %}</p>
+
+  {% with question_text=object_list.0.question_text %}
+    <p>przyklad with: {{ question_text }}</p>
+  {% endwith %}
+
+
+  {% if object_list %}
+    <ul>
+      {% for question in object_list reversed %}
+        <li style="{% cycle question.id 'x' %}">
+          <a href="{% url 'polls:detail' question.id %}">{{ question.question_text|upper }}
+          </a>{% if question.question_text|length > 9 %}({{ question.question_text|length }})
+        {% endif %}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No polls are available.</p>
+  {% endif %}
+
+  <p>Przyklad regroup: </p>
+  {% regroup cities|dictsort:"country" by country as country_list %}
+
+  <ul>
+    {% for country in country_list %}
+      <li>{{ forloop.counter|add:"1" }} {{ country.grouper }}
+        <ul>
+          {% for city in country.list %}
+            <li>{{ city.name }}: {{ city.population }} ({{ city.country }})</li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p>Dziś w różnych formatach: {{ today|date:"Y-m-d" }} ({{ today|date:"D   e" }})</p>
+  {#<pre>#}
+  {#  {% debug %}#}
+  {#</pre>#}
+
+  {% autoescape off %}
+    {{ text|escape }}
+  {% endautoescape %}
+
+  {{ text|cut:"Django" }}
+
+
+  {% for i in list_zmiennych %}
+    {{ i|default:"Pusto" }}
+  {% endfor %}
+
+  {{ list_zmiennych|first }}
+
+  {{ liczba|floatformat:"2" }}
+{% endblock %}
+
+
