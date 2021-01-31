@@ -13,6 +13,11 @@ class QuestionAdmin(admin.ModelAdmin):
 
 @admin.register(Choice)
 class ChoiceAdmin(admin.ModelAdmin):
+
+    raw_id_fields = [
+        'question',
+    ]
+
     list_display = [
         'question',
         'choice_text',

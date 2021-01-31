@@ -14,6 +14,7 @@ class Question(models.Model):  # polls_question
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
+
 class Choice(models.Model):  # polls_choice
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
