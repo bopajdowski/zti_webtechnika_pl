@@ -3,36 +3,34 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils import timezone
+from django.views import generic
 
 from .models import Question, Choice
 
 
-def index(request):
-    template_name = 'polls/index.html'
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    context = {
-        'latest_question_list': latest_question_list,
-        'today': timezone.now(),
-    }
-    return render(request, template_name, context)
+class IndexView(generic.ListView):
+    model = Question
+
+    def get_queryset(self):
+        """Return the last five published questions."""
+        return Question.objects.order_by('-pub_date')[:5]
 
 
-def detail(request, question_id):
+class ChoiceView(generic.ListView):
+    model = Choice
+    
+    def get_queryset(self):
+        return Choice.objects.filter(choice_text__istartswith='d')
+
+
+class DetailView(generic.DetailView):
+    model = Question
     template_name = 'polls/detail.html'
-    question = get_object_or_404(Question, pk=question_id)
-    context = {
-        'question': question,
-    }
-    return render(request, template_name, context)
 
 
-def results(request, question_id):
+class ResultsView(generic.DetailView):
+    model = Question
     template_name = 'polls/results.html'
-    question = get_object_or_404(Question, pk=question_id)
-    context = {
-        'question': question,
-    }
-    return render(request, template_name, context)
 
 
 def vote(request, question_id):
