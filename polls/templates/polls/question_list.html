@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+{% load i18n static %}
 {% block title %}{{ block.super }} - Lista pytań{% endblock %}
 {% block content %}
+  <img src="{% static 'wersja_loga/delipair_green.png' %}" alt="logo">
   {% filter upper %}
-    <h1>Lista pytań</h1>
+    <h1>{% trans 'Lista pytań' %}</h1>
   {% endfilter %}
 
   <p>Przyklad first of {% firstof 0 2 3 %}</p>
@@ -11,15 +13,18 @@
     <p>przyklad with: {{ question_text }}</p>
   {% endwith %}
 
+  {% templatetag openblock %} url 'entry_list' {% templatetag closeblock %}
 
   {% if object_list %}
     <ul>
       {% for question in object_list reversed %}
         <li style="{% cycle question.id 'x' %}">
-          <a href="{% url 'polls:detail' question.id %}">{{ question.question_text|upper }}
+          <a href="{% url 'polls:detail' question.id %}">{{ question.question_text|safe|lower|title }}
           </a>{% if question.question_text|length > 9 %}({{ question.question_text|length }})
         {% endif %}</li>
+
       {% endfor %}
+
     </ul>
   {% else %}
     <p>No polls are available.</p>
@@ -55,10 +60,55 @@
   {% for i in list_zmiennych %}
     {{ i|default:"Pusto" }}
   {% endfor %}
+  <br>
+  <br>
+  lista obiektów:<br>
+  {{ object_list|join:' | ' }}
+  {{ object_list|join:'\n'|linenumbers }}
 
-  {{ list_zmiennych|first }}
+  ilość ankiet: {{ object_list|length|linebreaks }}
+  czy to prawda: {{ object_list|length_is:"4" }}
 
+
+  <br><br>
   {{ liczba|floatformat:"2" }}
+
+
+  {{ 10|divisibleby:"3" }}
+
+  <br>
+  {{ 01053|get_digit:"2" }}
+
+  <p>{{ cities|json_script:"city-data" }}</p>
+
+
+  "{{ text|safe|ljust:"100" }}"
+
+  {{ "89-BARTEK"|phone2numeric }}
+
+  {% with num_messages=1 %}
+    {% if num_messages == 1 %}
+      masz {{ num_messages }} wiadomość.
+    {% else %}
+      masz {{ num_messages }} wiadomości.
+    {% endif %}
+  {% endwith %}
+
+  list: ------------<br>
+  <pre>
+  random:
+  <P>{{ cities|unordered_list }}</P>
+</pre>
+
+  {{ old_date|timesince }}
+
+ <li>{{ text|truncatechars:7 }}</li>
+ <li>{{ text }}</li>
+
+  <p>
+  wartość: {{ yesno_example|yesno:"x,y" }}
+  </p>
+
 {% endblock %}
 
 

@@ -1,3 +1,6 @@
+import datetime
+from pprint import pprint
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -32,6 +35,9 @@ class IndexView(generic.ListView):
         ]
         context['text'] = "i'm using Django <strong>test</strong>"
         context['liczba'] = 34.2345
+        context['old_date'] = timezone.now() - datetime.timedelta(days=50)
+        context['yesno_example'] = False
+
         return context
 
 
@@ -44,6 +50,7 @@ class ChoiceView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = Question
+    slug_field = 'slug'
 
 
 class ResultsView(generic.DetailView):

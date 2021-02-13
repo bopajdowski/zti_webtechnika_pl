@@ -12,7 +12,8 @@ class Question(models.Model):  # polls_question
         return self.question_text
 
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
 
 class Choice(models.Model):  # polls_choice
@@ -21,5 +22,5 @@ class Choice(models.Model):  # polls_choice
     votes = models.IntegerField(default=0)
 
     def __str__(self):
-        return f'{self.choice_text} ({self.question}) '
+        return f'{self.choice_text} ({self.question})'
 
