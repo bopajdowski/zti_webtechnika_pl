@@ -15,9 +15,9 @@
 
   {% templatetag openblock %} url 'entry_list' {% templatetag closeblock %}
 
-  {% if object_list %}
+  {% if latest_question_list %}
     <ul>
-      {% for question in object_list reversed %}
+      {% for question in latest_question_list reversed %}
         <li style="{% cycle question.id 'x' %}">
           <a href="{% url 'polls:detail' question.id %}">{{ question.question_text|safe|lower|title }}
           </a>{% if question.question_text|length > 9 %}({{ question.question_text|length }})

@@ -12,10 +12,13 @@ from .models import Question, Choice
 
 class IndexView(generic.ListView):
     model = Question
+    context_object_name = 'latest_question_list'
 
     def get_queryset(self):
         """Return the last five published questions."""
-        return Question.objects.order_by('-pub_date')[:5]
+        return Question.objects.filter(
+            pub_date__lte=timezone.now()
+        ).order_by('-pub_date')[:5]
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
