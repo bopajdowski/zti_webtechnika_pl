@@ -4,6 +4,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
+from .factorys import QuestionFactory
 from .models import Question, Choice
 
 
@@ -81,10 +82,13 @@ class QuestionIndexViewTests(TestCase):
         """
         expected_test = "Past question."
         create_question(question_text=expected_test, days=-30)
+        # question1 = QuestionFactory(pub_date=timezone.now()-datetime.timedelta(days=30),)
         response = self.client.get(reverse('polls:index'))
+        # quesryset = Question.objects.all()
         self.assertQuerysetEqual(
             response.context['latest_question_list'],
-            [f'<Question: {expected_test}>']
+            ['<Question: Past question.>']
+            # quesryset
         )
 
     def test_future_question(self):

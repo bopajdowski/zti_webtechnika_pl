@@ -9,6 +9,10 @@ from django.views import generic
 
 from .models import Question, Choice
 
+from rest_framework import routers, serializers, viewsets
+
+from .serializers import QuestionSerializer
+
 
 class IndexView(generic.ListView):
     model = Question
@@ -83,3 +87,8 @@ def vote(request, question_id):
         # user hits the Back button.
         success_url = reverse('polls:results', args=(question.id,))
         return HttpResponseRedirect(success_url)
+
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
