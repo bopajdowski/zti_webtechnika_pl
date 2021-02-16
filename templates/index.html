@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}{{ block.super }} - stron główna{% endblock %}
+{% block content %}
+  <P>To jest nasz content</P>
+
+  {% lorem 10 w random %}
+
+  <P>Dziś jest: {% now "SHORT_DATETIME_FORMAT" %}</P>
+{% endblock %}

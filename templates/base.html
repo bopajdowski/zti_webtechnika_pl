@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}MyPoll{% endblock %}</title>
+</head>
+<body>
+{% include "polls/menu.html" %}
+
+{% block content %}
+Coś
+{% endblock %}
+
+
+{% comment %}
+hfjkdshfjkdsfhkshkjfds  hfksjdhf ksdh fksd
+{% endcomment %}
+{% now "Y" as current_year %}
+<p>Copyright {{ current_year }}</p>
+</body>
+</html>
