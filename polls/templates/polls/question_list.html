@@ -109,6 +109,9 @@
   wartość: {{ yesno_example|yesno:"x,y" }}
   </p>
 
+  user: {{ request.user }}
+  <br>user is superuser?: {{ request.user.is_superuser|yesno }}
+
 {% endblock %}
 
 
