@@ -1,0 +1,42 @@
+{% extends 'base_html.html' %}
+{% load static %}
+{% block title %}tutorial | {{ block.super }}{% endblock %}
+{% block content %}
+  <h1>This is a Heading</h1>
+  <h2>This is a paragraph.</h2>
+  <a href="https://www.w3schools.com" title="This is my first link">This is
+    a link</a>
+  <img src="{% static 'wersja_loga/delipair_green.png' %}">
+  <img src="http://127.0.0.1:8000/static/wersja_loga/delipair_green.png">
+  <a href="https://wp.pl/" class="nasz-link-do-wp">test</a>
+
+    <a href="#zti">Przenies mnie do ZTI</a>
+  <p id="xxxx" style="background-repeat: no-repeat">
+    <a href="https://webtechnika.pl/">test</a>
+  </p>
+  <br><br>
+
+  <p>{% lorem 120 p %}</p>
+
+  Jakis tekst<br>
+  nawet w 2 liniach
+
+
+  <p>Here is a quote from WWF's website:</p>
+  <blockquote cite="http://www.worldwildlife.org/who/index.html">
+    For 50 years, WWF has been protecting the future of nature.
+    The world's leading conservation organization,
+    WWF works in 100 countries and is supported by
+    1.2 million members in the United States and
+    close to 5 million globally.
+  </blockquote>
+
+
+  <a title="Send mail to" href="mailto:someone@example.com?subject=testdddd&body=czesc%20to%20ja">Send
+    email</a>
+
+  <button onclick="document.location='{% url 'home' %}'">Home</button>
+
+  <p id="zti">{% lorem 30 p %}</p>
+
+{% endblock %}

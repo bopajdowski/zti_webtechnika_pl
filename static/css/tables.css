@@ -1,0 +1,39 @@
+table, th, td {
+  border: 1px solid black;
+
+}
+
+th, td {
+  padding: 15px;
+}
+
+th {
+  text-align: left;
+}
+
+table {
+  border-spacing: 5px;
+}
+
+#t01 {
+  width: 100%;
+  border-spacing: 2px;
+  background-color: #f1f1c1;
+}
+
+#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+#t01 tr:nth-child(odd) {
+  background-color: #fff;
+}
+#t01 th {
+  color: white;
+  background-color: black;
+}
+
+.testowa {
+  border-color: #16f500;
+}
+
+

@@ -1,0 +1,46 @@
+body {
+    background-color: powderblue;
+}
+
+h1 {
+    color: blue;
+}
+
+p {
+    color: red;
+}
+
+.nasz-link-do-wp {
+    color: yellow;
+}
+
+blockquote {
+    border: 2px dashed Tomato;
+}
+
+
+#xxxx a:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+#xxxx a:visited {
+    color: pink;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+#xxxx a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+#xxxx a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: overline;
+}
+
+

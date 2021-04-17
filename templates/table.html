@@ -1,0 +1,47 @@
+{% extends 'base_html.html' %}
+{% load static %}
+{% block title %}table | {{ block.super }}{% endblock %}
+{% block my_extra_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'css/tables.css' %}">
+{% endblock my_extra_css %}
+
+
+{% block content %}
+ &#128512; &#128516; &#128525; &#128151; <span style="margin-left:40px;">f</span>
+  <ol type="1" start="50">
+    {% for object in question_list %}
+      <li><a href="#">{{ object.question_text }}</a>
+        <ol type="1" start="{{ forloop.counter0 }}"><li>x</li><li>y</li></ol>
+      </li>
+    {% endfor %}
+  </ol>
+
+
+  <table id="t01">
+    <caption>Question list</caption>
+    <thead>
+    <tr>
+      <th>question</th>
+      <th>pub_date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for object in question_list %}
+      <tr>
+        <td>{{ object.question_text|safe }}</td>
+        <td>{{ object.pub_date }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+    <tr>
+      <td>sum</td>
+      <td>xxxx</td>
+    </tr>
+    </tfoot>
+  </table>
+
+{% endblock content %}
+
+
